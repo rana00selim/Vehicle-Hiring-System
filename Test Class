@@ -1,0 +1,180 @@
+package project3;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author Rana
+ */
+public class TestClass {
+    public static void main(String[] args) throws Exception {
+        
+        Scanner input = new Scanner(System.in);
+        Person person = new Person();
+        int ans = 1;
+        while(ans != 6){
+        System.out.println("Welcome to VPark Company...");
+        System.out.println("---------------| MAIN MENU |---------------");
+        System.out.println("(Press 1) Display all vehicles");
+        System.out.println("(Press 2) Display available vehicles");
+        System.out.println("(Press 3) Register");
+        System.out.println("(Press 4) Continue as registered user");
+        System.out.println("(Press 5) Continue as admin");
+        System.out.println("(Press 6) Quit");
+        ans = input.nextInt();
+        if(ans == 1){
+            VehiclePark.displayVehicles();
+        }
+        if(ans == 2){
+            VehiclePark.displayAvailableVehicles();
+        }
+        
+        if(ans == 3){
+            Person.register();
+        }
+        
+        if(ans == 4){
+            System.out.println("Your ID: ");
+            int ID = input.nextInt();
+            int xx = 0;
+            for(int i = 0; i < RegisteredUser.getAccountList().size() ; i++){
+                if(RegisteredUser.getAccountList().get(i).getId() == ID){
+                    xx++;
+                }
+            }if(xx == 0){
+                System.out.println("Wrong ID or not registered user.");
+            }else{
+            ///////////////////////MENU4///////////////////////////
+            while(ans != 8){
+            System.out.println("(Press 1) Display all vehicles");
+            System.out.println("(Press 2) Display available vehicles");
+            System.out.println("(Press 3) Display available vehicles by type");
+            System.out.println("(Press 4) Book vehicle");
+            System.out.println("(Press 5) Cancel my booking");
+            System.out.println("(Press 6) Rent vehicle");           
+            System.out.println("(Press 7) Drop vehicle");   
+            System.out.println("(Press 8) Quit");   
+            ans = input.nextInt();
+            if(ans == 1){
+                VehiclePark.displayVehicles();
+            }
+            if(ans == 2){
+                VehiclePark.displayAvailableVehicles();
+            }
+            
+            if(ans == 3){
+                VehiclePark.displayAvailableVehicles();
+            }
+            
+            if(ans == 4){
+                VehiclePark.bookVehicle();
+            }
+            
+            if(ans == 5){
+                VehiclePark.cancelBooking();
+            }
+            
+            if(ans == 6){
+                VehiclePark.rentVehicle();
+            }
+            
+            if(ans == 7){
+                VehiclePark.dropVehicle();
+            }
+            
+            }////////////////////////MENU4/////////////////////////////
+            
+            if(ans == 8){
+                System.out.println("Returning to the main menu...");
+                ans = 1;///////
+            }
+        }
+        }
+        
+        if(ans == 5){
+            System.out.println("Are you an admin? (yes/no)");
+            input.nextLine();
+            String anss = input.nextLine();
+            String no = "no";
+            if(anss.equalsIgnoreCase(no)){
+            System.out.println("Your ID: ");
+            int ID = input.nextInt();
+            int xx = 0;
+            for(int i = 0; i < RegisteredUser.getAccountList().size() ; i++){
+                if(RegisteredUser.getAccountList().get(i).getId() == ID){
+                    xx++;
+                    
+                }
+            }if(xx == 0){
+                System.out.println("Wrong ID");
+             }else{
+                System.out.println("Create username: ");
+                input.nextLine();
+                String username = input.nextLine();
+                Admin newA = new Admin(ID, RegisteredUser.getName(), RegisteredUser.getPhone(), RegisteredUser.getAddress(), username);
+                Admin.getAdminList().add(newA);
+            } 
+            }else{
+                int xx = 0;
+                System.out.println("Username: ");
+                input.nextLine();
+                String username = input.nextLine();
+                for(int i = 0; i < Admin.getAdminList().size() ; i++){
+                if(Admin.getAdminList().get(i).getUsername().equals(username)){
+                    xx++;
+                }
+            }if(xx == 0){
+                System.out.println("Wrong username or not an admin.");
+            }else{
+                
+            ///////////
+            ///////////////////////MENU5/////////////////////////
+            while(ans != 6){
+            System.out.println("(Press 1) Display all vehicles");
+            System.out.println("(Press 2) Display available vehicles");
+            System.out.println("(Press 3) Add a new vehicle to the system");
+            System.out.println("(Press 4) Remove vehicle");
+            System.out.println("(Press 5) Reports");
+            System.out.println("(Press 6) Quit");    
+            ans = input.nextInt();
+            
+            if(ans == 1){
+                VehiclePark.displayVehicles();
+            }
+            
+            if(ans == 2){
+                VehiclePark.displayAvailableVehicles();
+            }
+            
+            if(ans == 3){
+                VehiclePark.addVehicle();
+            }
+            
+            if(ans == 4){
+                VehiclePark.removeVehicle();
+            }
+            
+            if(ans == 5){
+                
+            }
+            
+            }//////////////////////MENU5////////////////////
+            if(ans == 6){
+                System.out.println("Returning to the main menu...");
+                ans = 1;///////
+            }
+            }
+            }
+        }
+            
+            
+        
+        if(ans < 1 || ans > 6){
+            System.out.println("Invalid number. Please try again.");
+        }
+    }
+        if(ans == 6){
+            System.out.println("Thank you for selecting us. Hope you come again :) ");
+        }
+    }
+}
