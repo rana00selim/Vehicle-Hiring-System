@@ -1,0 +1,213 @@
+package project3;
+
+import java.util.Date;
+import java.util.Scanner;
+import static project3.VehiclePark.getVehicleList;
+import static project3.VehiclePark.getBookedVehicleList;
+import static project3.VehiclePark.getRentedVehicleList;
+/**
+ *
+ * @author Rana
+ */
+public abstract class Vehicle {
+    
+    private int vehicleID;
+    private int plateNumber;
+    private int numberOfTires;
+    private int dailyFee;
+    private boolean isRented;
+    private int numberOfDays =  (getRentEndDate().getHours()-getRentStartDate().getHours())/24;
+    private Date rentStartDate;
+    private Date rentEndDate;
+    private String currentPlace;
+    private int totalPrice;
+    Scanner input = new Scanner(System.in);
+
+    public Vehicle(int plateNumber, int numberOfTires, int dailyFee, boolean isRented, String currentPlace) {
+        this.vehicleID = ((int)(Math.random()*10000 ))+ 100000;
+        this.plateNumber = plateNumber;
+        this.numberOfTires = numberOfTires;
+        this.dailyFee = dailyFee;
+        isRented = false;
+        this.currentPlace = "VPark Company";
+    }
+    
+    public void addVehicle(){
+        
+    }
+    
+    public int getPlateNumber() {
+        return plateNumber;
+    }
+
+    public int getNumberOfTires() {
+        return numberOfTires;
+    }
+    
+    public int getDailyFee() {
+        return dailyFee*numberOfDays;
+    }
+    
+    public boolean getIsRented() {
+        return isRented;
+    }
+    
+     public Date getRentStartDate() {
+        return rentStartDate;
+    }
+
+    public Date getRentEndDate() {
+        return rentEndDate;
+    }
+
+    public String getCurrentPlace() {
+        return currentPlace;
+    }
+
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+    
+    public int getVehicleID() {
+        return vehicleID;
+    }
+
+    public boolean isIsRented() {
+        return isRented;
+    }
+
+    public int getNumberOfDays() {
+        return numberOfDays;
+    }
+    
+    public void setCurrentPlace(String currentPlace) {
+        this.currentPlace = currentPlace;
+    }
+    
+    public void setTotalPrice(Vehicle vehicle) {
+        this.totalPrice = vehicle.getDailyFee()*vehicle.getNumberOfDays();///////
+    }
+    
+    public void setIsRented(boolean isRented){
+        this.isRented = isRented ;
+    }
+
+    public void setRentStartDate(Date rentStartDate) {
+        this.rentStartDate = rentStartDate;
+    }
+
+    public void setRentEndDate(Date rentEndDate) {
+        this.rentEndDate = rentEndDate;
+    }
+    
+    public abstract void setDailyFee();
+    
+    public void bookMe(Date bookStartDate, Date bookEndDate) throws Exception{
+         int x = 0;
+            for(int i = 0; i < getVehicleList().size(); i++){
+                if("Sports.class".equals(getVehicleList().get(i).getClass().getName()) || "Truck.class".equals(getVehicleList().get(i).getClass().getName())){
+                    if(getVehicleList().get(i).getIsRented() == false && getBookedVehicleList().contains(getVehicleList().get(i))){
+                        System.out.println(getVehicleList().get(i).toString());
+                    }else if (getVehicleList().get(i).getIsRented() == true && getBookedVehicleList().contains(getVehicleList().get(i))) {//rent durumu
+                        if(bookStartDate.after(getVehicleList().get(i).getRentStartDate())){
+                            System.out.println(getVehicleList().get(i).toString()); 
+                        }   
+                    }
+                }
+            }
+           System.out.println("Here is the the available vehicles at that dates. Which vehicle do you want to book? (Enter ID)");
+           int anss = input.nextInt();
+           int y = 0;
+           for(int i = 0; i < getVehicleList().size(); i++){
+               if(getVehicleList().get(i).getVehicleID() == anss){
+                   y++;
+                   getBookedVehicleList().add(getVehicleList().get(i));//////////tarih?
+                   System.out.println("Successfully booked.");
+               }
+           }
+           if(y == 0){
+               System.out.println("Invalid ID number.");
+           }
+        if(x == 0){
+            throw new Exception("SorryWeDontHaveThatOneException");
+        }
+        //tüm durumlar if((1.before(x) && 2.before(x)) || (3.before(x) && 4.before(y)) || (5.after(x) && 6.before(y)) || (7.before(y) && 8.after(y)) || (9.after(y) && 10.after(y)))
+                        //1 3 5 7 9 rentStartDate -- 2 4 6 8 10 rentEndDate -- x getVehicleList().get(i).getRentStartDate() -- y getVehicleList().get(i).getRentEndDate()
+                       
+    }
+    
+    public void cancelMe() throws Exception{
+        int x = 0;
+        if(getBookedVehicleList().isEmpty()){
+            System.out.println("There aren't any booking in the list");
+        }else{
+            for(int i = 0; i < getBookedVehicleList().size(); i++){
+            System.out.println((i+1) + ") " + getBookedVehicleList().get(i));
+            }
+            System.out.println("Which one do you want to cancel? ");
+            int anss = input.nextInt();
+            Date date= new Date();
+            if(getBookedVehicleList().get(anss-1).rentStartDate.before(date)){
+                getBookedVehicleList().remove(anss-1);
+                System.out.println("Booking has cancelled successfully.");
+            }else{
+                throw new Exception("NoCancellationYouMustPayException");
+            }
+        }
+    }
+    
+    public void rentMe(Date rentStartDateN, Date rentEndDateN) throws Exception{
+       int x = 0;
+            for(int i = 0; i < getVehicleList().size(); i++){
+                    if(getVehicleList().get(i).getIsRented() == false){
+                        System.out.println(getVehicleList().get(i).toString());
+                    }
+                }
+           System.out.println("Here is the the available vehicles at that dates. Which vehicle do you want to rent? (Enter ID)");
+           int anss = input.nextInt();
+           int y = 0;
+           for(int i = 0; i < getVehicleList().size(); i++){
+               if(getVehicleList().get(i).getVehicleID() == anss){
+                   y++;
+                   getRentedVehicleList().add(getVehicleList().get(i));//////////tarih?
+                   getVehicleList().get(i).setIsRented(isRented == true);
+                   getVehicleList().get(i).setRentStartDate(rentStartDateN);
+                   getVehicleList().get(i).setRentEndDate(rentEndDateN);
+                   ////////////////delLoc Drop Loc , String delLocation, String dropLocation
+                   System.out.println("Successfully rented.");
+               }
+           }
+           if(y == 0){
+               System.out.println("Invalid ID number.");
+           }
+        if(x == 0){
+            throw new Exception("SorryWeDontHaveThatOneException");
+        }
+    }
+    
+    public void dropMe(Vehicle vehicle){
+        vehicle.currentPlace = "VPark Company";
+        vehicle.setIsRented(isRented == false);
+        getRentedVehicleList().remove(vehicle);
+        vehicle.setRentStartDate(null);
+        vehicle.setRentEndDate(null);
+        setTotalPrice(vehicle);
+        System.out.println("Total price: " + (double)vehicle.getTotalPrice());
+    }
+    
+    public void loadMe(int additionalLoad, int vehicleLoadingCap) throws Exception{
+        if(additionalLoad > vehicleLoadingCap){
+            throw new Exception("OverWeightException");
+        }else{
+            System.out.println("Loaded successfully");
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Vehicle{" + "Vehicle ID=" + vehicleID + ", Plate Number =" + plateNumber + ", Number Of Tires =" + numberOfTires + ", Daily Fee =" + dailyFee + ", Is Rented =" + isRented + ", Number Of Days =" + numberOfDays + ", Rent Start Date =" + rentStartDate + ", Rent End Date=" + rentEndDate + ", Current Place=" + currentPlace + ", Total Price =" + totalPrice + '}';
+    }
+    
+    
+}
+
