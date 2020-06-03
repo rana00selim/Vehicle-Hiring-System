@@ -1,0 +1,26 @@
+package project3;
+
+/**
+ *
+ * @author Rana
+ */
+public class SUV extends Car{
+    private String typeOfWD;
+    SUV(int plateNumber, int numberOfTires, int dailyFee, boolean isRented, String color, int seatingCap, int numOfDoors, String typeOfWD, String currentPlace){
+        super(plateNumber, numberOfTires, dailyFee, isRented, color, seatingCap, numOfDoors, currentPlace);
+        this.typeOfWD = typeOfWD;
+    }
+
+    public String getTypeOfWD() {
+        return typeOfWD;
+    }
+
+    public void setTypeOfWD(String typeOfWD) {
+        this.typeOfWD = typeOfWD;
+    }
+    @Override
+    public void setDailyFee() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+}
