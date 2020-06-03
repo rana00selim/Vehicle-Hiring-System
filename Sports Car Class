@@ -1,0 +1,43 @@
+package project3;
+
+/**
+ *
+ * @author Rana
+ */
+public class Sports extends Car{
+    private int HP;
+    private boolean isBooked;
+   
+    Sports(int plateNumber, int numberOfTires, int dailyFee, boolean isRented, String color, int seatingCap, int numOfDoors, int HP, String currentPlace){
+        super(plateNumber, numberOfTires, dailyFee, isRented, color, seatingCap, numOfDoors, currentPlace);
+        this.HP = HP;
+        isBooked = false;
+    }
+
+    public int getHP() {
+        return HP;
+    }
+
+    public void setHP(int HP) {
+        this.HP = HP;
+    }
+
+    public boolean getIsBooked() {
+        return isBooked;
+    }
+
+    public void setIsBooked(boolean isBooked) {
+        this.isBooked = isBooked;
+    }
+    @Override
+    public void setDailyFee() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String toString() {
+        return "Type => Sports {" + "HP =" + HP + ", Is Booked =" + isBooked + '}';
+    }
+    
+    
+}
