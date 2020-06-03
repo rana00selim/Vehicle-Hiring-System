@@ -1,0 +1,44 @@
+package project3;
+
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Rana
+ */
+public class RegisteredUser extends Person {
+    private static ArrayList <RegisteredUser> accountList = new ArrayList();
+    private static int id;
+    private static String name;
+    private static long phone;
+    private static String address;
+    
+    public RegisteredUser(String name, long phone, String address) {
+        this.id = ((int)(Math.random()*10000 ))+ 100000;
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+    }
+    
+    public static ArrayList<RegisteredUser> getAccountList() {
+        return accountList;
+    }
+
+    public static int getId() {
+        return id;
+    }
+
+    public static String getName() {
+        return name;
+    }
+
+    public static long getPhone() {
+        return phone;
+    }
+
+    public static String getAddress() {
+        return address;
+    }
+    
+    
+}
