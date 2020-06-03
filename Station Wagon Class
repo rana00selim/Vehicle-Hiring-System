@@ -1,0 +1,32 @@
+package project3;
+
+/**
+ *
+ * @author Rana
+ */
+public class StationWagon extends Car{
+    private int loadingCap;
+    
+    StationWagon(int plateNumber, int numberOfTires, int dailyFee,boolean isRented, String color, int seatingCap, int numOfDoors, int loadingCap, String currentPlace){
+        super(plateNumber, numberOfTires, dailyFee, isRented, color, seatingCap, numOfDoors, currentPlace);
+        this.loadingCap = loadingCap;
+    }
+
+    public int getLoadingCap() {
+        return loadingCap;
+    }
+
+    public void setLoadingCap(int loadingCap) {
+        this.loadingCap = loadingCap;
+    }
+    @Override
+    public void setDailyFee() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String toString() {
+        return "Type => StationWagon {" + "Loading Cap =" + loadingCap + '}';
+    }
+    
+}
