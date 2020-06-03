@@ -1,0 +1,19 @@
+package project3;
+
+/**
+ *
+ * @author Rana
+ */
+public class smallTrucks extends Truck{
+    smallTrucks(int plateNumber, int numberOfTires, int dailyFee, boolean isRented, int loadingCap, String currentPlace){
+        super(plateNumber, numberOfTires, dailyFee, isRented, loadingCap, currentPlace);
+    }
+    @Override
+    public void setDailyFee() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public String toString(){
+        return "Type => Small Truck";
+    }
+}
