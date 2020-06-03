@@ -1,0 +1,50 @@
+package project3;
+
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Rana
+ */
+public class Admin {
+    
+    private static ArrayList <Admin> adminList = new ArrayList();
+    private static int id;
+    private static String name;
+    private static long phone;
+    private static String address;
+    private static String username;
+
+    public Admin(int id, String name, long phone, String address, String username) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.username = username;
+    }
+
+    public static ArrayList<Admin> getAdminList() {
+        return adminList;
+    }
+    
+    public static int getId() {
+        return id;
+    }
+
+    public static String getName() {
+        return name;
+    }
+
+    public static long getPhone() {
+        return phone;
+    }
+
+    public static String getAddress() {
+        return address;
+    }
+
+    public static String getUsername() {
+        return username;
+    }
+      
+}
