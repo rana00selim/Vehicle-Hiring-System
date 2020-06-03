@@ -1,0 +1,63 @@
+package project3;
+
+/**
+ *
+ * @author Rana
+ */
+public abstract class Car extends Vehicle{
+    private String color;
+    private int seatingCap;
+    private int numOfDoors;
+    private String currentPlace;
+    
+    Car(int plateNumber, int numberOfTires, int dailyFee, boolean isRented, String color, int seatingCap, int numOfDoors, String currentPlace){
+        super(plateNumber, numberOfTires, dailyFee, isRented, currentPlace);
+        this.color = color;
+        this.seatingCap = seatingCap;
+        this.numOfDoors = numOfDoors;
+        this.currentPlace = "VPark Company";
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public int getSeatingCap() {
+        return seatingCap;
+    }
+
+    public void setSeatingCap(int seatingCap) {
+        this.seatingCap = seatingCap;
+    }
+
+    public int getNumOfDoors() {
+        return numOfDoors;
+    }
+
+    public void setNumOfDoors(int numOfDoors) {
+        this.numOfDoors = numOfDoors;
+    }
+
+    public String getCurrentPlace() {
+        return currentPlace;
+    }
+
+    public void setCurrentPlace(String currentPlace) {
+        this.currentPlace = currentPlace;
+    }
+
+    @Override
+    public void setDailyFee() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String toString() {
+        return "Type => Car {" + "Color =" + color + ", Seating Capacity =" + seatingCap + ", Num Of Doors =" + numOfDoors + ", Current Place =" + currentPlace + '}';
+    }
+        
+}
