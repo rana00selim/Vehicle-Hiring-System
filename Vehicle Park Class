@@ -1,0 +1,289 @@
+package project3;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;
+
+/**
+ *
+ * @author Rana
+ */
+public class VehiclePark {
+    private static Vehicle vehicle;
+    private static ArrayList <Vehicle> vehicleList = new ArrayList<>();
+    private static ArrayList <Vehicle> bookedVehicleList = new ArrayList<>();
+    private static ArrayList <Vehicle> rentedVehicleList = new ArrayList<>();
+    private static ArrayList <Person> registeredCustomers = new ArrayList<>();
+    
+    public static ArrayList<Vehicle> getVehicleList() {
+        return vehicleList;
+    }
+
+    public static ArrayList<Vehicle> getBookedVehicleList() {
+        return bookedVehicleList;
+    }
+
+    public static ArrayList<Vehicle> getRentedVehicleList() {
+        return rentedVehicleList;
+    }
+
+    public static ArrayList<Person> getRegisteredCustomers() {
+        return registeredCustomers;
+    }
+
+    
+    
+    public static void displayVehicles(){
+        for(int i = 0; i < vehicleList.size(); i++){
+            System.out.println((i+1) + ") " + vehicleList.get(i));
+        }
+    }
+    
+    public static void displayAvailableVehicles(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Please enter the date you wanted; ");
+        System.out.println("Start => ");
+        System.out.println("Day (dd): ");
+        int dd1 = input.nextInt();
+        System.out.println("Month (mm): ");
+        int mm1 = input.nextInt();
+        System.out.println("Year (yyyy): ");
+        int yyyy1 = input.nextInt();
+        Date dateStart = new Date(yyyy1-1900,mm1-1,dd1);
+        System.out.println("End => ");
+        System.out.println("Day (dd): ");
+        int dd2 = input.nextInt();
+        System.out.println("Month (mm): ");
+        int mm2 = input.nextInt();
+        System.out.println("Year (yyyy): ");
+        int yyyy2 = input.nextInt();
+        Date dateEnd = new Date(yyyy2-1900,mm2-1,dd2);
+        int x = 0;
+        for(int i = 0; i < vehicleList.size(); i++){
+            if(vehicleList.get(i).getIsRented() == false){
+                if(vehicleList.get(i).getRentStartDate().before(dateEnd) || vehicleList.get(i).getRentEndDate().before(dateStart))
+                System.out.println((x+1) + " " +getVehicleList().get(i).toString());
+                x++;
+            }
+        }
+    }
+    
+    public static void addVehicle(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Which type of vehicle do you want to add? (Enter num)");
+        System.out.println("1 Sports Car | 2 StationWagon Car | 3 SUV Car | 4 Small Truck | 5 TransportTruck");
+        int anss = input.nextInt();
+        switch(anss){ 
+            case 1: //(int plateNumber, int numberOfTires, int dailyFee, boolean isRented, String color, int seatingCap, int numOfDoors, int HP, String currentPlace){
+                System.out.println("Enter plate number: ");
+                int pn = input.nextInt();
+                System.out.println("Enter number of tires: ");
+                int not = input.nextInt();
+                System.out.println("Enter seating capacity: ");
+                int sc = input.nextInt();
+                System.out.println("Enter number of doors: ");
+                int nod = input.nextInt();
+                System.out.println("Enter HP: ");
+                int hp = input.nextInt();
+                System.out.println("Enter daily fee: ");
+                int df = input.nextInt();
+                System.out.println("Enter color: ");
+                String c = input.nextLine();
+                Sports newV = new Sports(pn, not, df, false, c, sc, nod, hp, "VPark Company");
+                getVehicleList().add(newV);
+                break; 
+            case 2: //StationWagon(int plateNumber, int numberOfTires, int dailyFee, String color, int seatingCap, int numOfDoors, int loadingCap){
+                System.out.println("Enter plate number: ");
+                int pn2 = input.nextInt();
+                System.out.println("Enter number of tires: ");
+                int not2 = input.nextInt();
+                System.out.println("Enter seating capacity: ");
+                int sc2 = input.nextInt();
+                System.out.println("Enter number of doors: ");
+                int nod2 = input.nextInt();
+                System.out.println("Enter loading capacity: ");
+                int lc2 = input.nextInt();
+                System.out.println("Enter daily fee: ");
+                int df2 = input.nextInt();
+                System.out.println("Enter color: ");
+                String c2 = input.nextLine();
+                StationWagon newV2 = new StationWagon(pn2, not2, df2, false, c2, sc2, nod2, lc2, "VPark Company");
+                getVehicleList().add(newV2);
+                break; 
+            case 3: //SUV(int plateNumber, int numberOfTires, int dailyFee, String color, int seatingCap, int numOfDoors, String typeOfWD){
+                System.out.println("Enter plate number: ");
+                int pn3 = input.nextInt();
+                System.out.println("Enter number of tires: ");
+                int not3 = input.nextInt();
+                System.out.println("Enter seating capacity: ");
+                int sc3 = input.nextInt();
+                System.out.println("Enter number of doors: ");
+                int nod3 = input.nextInt();
+                System.out.println("Enter daily fee: ");
+                int df3 = input.nextInt();
+                System.out.println("Enter type of wheeldrive: ");
+                String wd3 = input.nextLine();
+                System.out.println("Enter color: ");
+                String c3 = input.nextLine();
+                SUV newV3 = new SUV(pn3, not3, df3, false, c3, sc3, nod3, wd3, "VPark Company");
+                getVehicleList().add(newV3);
+                break;
+            case 4: //smallTrucks(int plateNumber, int numberOfTires, int dailyFee, boolean isRented, int loadingCap, String currentPlace){
+                System.out.println("Enter plate number: ");
+                int pn4 = input.nextInt();
+                System.out.println("Enter number of tires: ");
+                int not4 = input.nextInt();
+                System.out.println("Enter loading capacity: ");
+                int lc4 = input.nextInt();
+                System.out.println("Enter daily fee: ");
+                int df4 = input.nextInt();
+                smallTrucks newV4 = new smallTrucks(pn4, not4, df4, false, lc4, "VPark Company");
+                getVehicleList().add(newV4); 
+                break; 
+            case 5: //TransportTrucks(int plateNumber, int numberOfTires, int dailyFee, int loadingCap, boolean goesAbroad){
+                System.out.println("Enter plate number: ");
+                int pn5 = input.nextInt();
+                System.out.println("Enter number of tires: ");
+                int not5 = input.nextInt();
+                System.out.println("Enter loading capacity: ");
+                int lc5 = input.nextInt();
+                System.out.println("Enter daily fee: ");
+                int df5 = input.nextInt();
+                System.out.println("Enter yes or no if it goes abroad: ");
+                String x = input.nextLine();
+                if(x.equalsIgnoreCase("yes")){
+                    TransportTrucks newV5 = new TransportTrucks(pn5, not5, df5, false, lc5, true, "VPark Company");
+                    getVehicleList().add(newV5); 
+                }else{
+                    TransportTrucks newV5 = new TransportTrucks(pn5, not5, df5, false, lc5, false, "VPark Company");
+                    getVehicleList().add(newV5); 
+                }
+                break;     
+                default: 
+                System.out.println("no match"); 
+        } 
+        
+        System.out.println("Vehicle successfully added.");
+    }
+    
+    public static void removeVehicle(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Which Vehicle do you want to remove? (Enter vehicleID) :");
+        for(int i = 0; i < vehicleList.size(); i++){
+        System.out.println(vehicleList.get(i).toString());
+        }
+        int ans = input.nextInt();
+        int x = 0;
+        for(int i = 0; i < vehicleList.size(); i++){
+           if(vehicleList.get(i).getVehicleID() == ans){
+               vehicleList.remove(vehicleList.get(i));
+               System.out.println("Successfully removed.");
+               x++;
+           } 
+        }
+        if(x == 0){
+            System.out.println("Invalid number!");
+        }
+    }
+    
+    public static void bookVehicle() throws Exception{
+        Scanner input = new Scanner(System.in);
+        System.out.println("Please enter the date you wanted; ");
+        System.out.println("Start => ");
+        System.out.println("Day (dd): ");
+        int dd1 = input.nextInt();
+        System.out.println("Month (mm): ");
+        int mm1 = input.nextInt();
+        System.out.println("Year (yyyy): ");
+        int yyyy1 = input.nextInt();
+        Date bookStartDate = new Date(yyyy1-1900,mm1-1,dd1);
+        System.out.println("End => ");
+        System.out.println("Day (dd): ");
+        int dd2 = input.nextInt();
+        System.out.println("Month (mm): ");
+        int mm2 = input.nextInt();
+        System.out.println("Year (yyyy): ");
+        int yyyy2 = input.nextInt();
+        Date bookEndDate = new Date(yyyy2-1900,mm2-1,dd2);
+        vehicle.bookMe(bookStartDate,bookEndDate);
+    }
+    
+    public static void cancelBooking() throws Exception{
+        vehicle.cancelMe();
+    }
+    
+    public static void rentVehicle() throws Exception{
+        Scanner input = new Scanner(System.in);
+        System.out.println("Please enter the date you wanted; ");
+        System.out.println("Start => ");
+        System.out.println("Day (dd): ");
+        int dd1 = input.nextInt();
+        System.out.println("Month (mm): ");
+        int mm1 = input.nextInt();
+        System.out.println("Year (yyyy): ");
+        int yyyy1 = input.nextInt();
+        Date rentStartDate = new Date(yyyy1-1900,mm1-1,dd1);
+        System.out.println("End => ");
+        System.out.println("Day (dd): ");
+        int dd2 = input.nextInt();
+        System.out.println("Month (mm): ");
+        int mm2 = input.nextInt();
+        System.out.println("Year (yyyy): ");
+        int yyyy2 = input.nextInt();
+        Date rentEndDate = new Date(yyyy2-1900,mm2-1,dd2);
+        
+        vehicle.rentMe(rentStartDate,rentEndDate);
+    }
+    
+    public static void dropVehicle() throws Exception{
+        Scanner input = new Scanner(System.in);
+        System.out.println("Which Vehicle do you want to drop? (Enter vehicleID) :");
+        for(int i = 0; i < vehicleList.size(); i++){
+        System.out.println(vehicleList.get(i).toString());
+        }
+        int ans = input.nextInt();
+        int x = 0;
+        for(int i = 0; i < vehicleList.size(); i++){
+           if(vehicleList.get(i).getVehicleID() == ans){
+               vehicle.dropMe(vehicleList.get(i));
+               System.out.println("Successfully dropped.");
+               x++;
+           } 
+        }
+        if(x == 0){
+            System.out.println("Invalid number!");
+        }
+       
+    }
+    
+    public static void load() throws Exception{// public void loadMe(int additionalLoad, int vehicleLoadingCap) throws Exception{
+        Scanner input = new Scanner(System.in);
+        System.out.println("Which Vehicle do you want to load? (Enter vehicleID) :");
+        for(int i = 0; i < vehicleList.size(); i++){
+        System.out.println(vehicleList.get(i).toString());
+        }
+        int ans = input.nextInt();
+        System.out.println("What is the amount of that trucks load capacity: ");
+        int loadc = input.nextInt();
+        System.out.println("What is the amount you want to load: ");
+        int load = input.nextInt();
+        int x = 0;
+        for(int i = 0; i < vehicleList.size(); i++){
+           if(vehicleList.get(i).getVehicleID() == ans){
+               vehicle.loadMe(load, loadc);
+               System.out.println("Successfully loaded.");
+               x++;
+           } 
+        }
+        if(x == 0){
+            System.out.println("Invalid number!");
+        }
+    }
+    
+    public void dailyReport(){
+        
+    }
+}
+    
+
+ 
