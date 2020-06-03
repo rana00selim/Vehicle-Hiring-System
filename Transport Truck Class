@@ -1,0 +1,29 @@
+package project3;
+
+/**
+ *
+ * @author Rana
+ */
+public class TransportTrucks extends Truck{
+    private boolean goesAbroad;
+    TransportTrucks(int plateNumber, int numberOfTires, int dailyFee, boolean isRented, int loadingCap, boolean goesAbroad, String currentPlace){
+        super(plateNumber, numberOfTires, dailyFee, isRented, loadingCap, currentPlace);
+        this.goesAbroad = goesAbroad;
+    }
+
+    public boolean isGoesAbroad() {
+        return goesAbroad;
+    }
+
+    public void setGoesAbroad(boolean goesAbroad) {
+        this.goesAbroad = goesAbroad;
+    }
+    @Override
+    public void setDailyFee() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public String toString(){
+        return "Type => Transport Truck {Goes abroad: " + goesAbroad + "}";
+    }
+}
